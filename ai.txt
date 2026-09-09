@@ -1,0 +1,23 @@
+# ai.txt for regularly.us
+# Plain-language description of this site for AI crawlers and assistants.
+# A fuller version lives at https://regularly.us/llms.txt
+
+Site: Regularly
+URL: https://regularly.us/
+Contact: hello@regularly.us
+Status: Under development. Waitlist only.
+
+What it is:
+Regularly is an upcoming app for regulars and the businesses they visit.
+Regulars get held recurring slots, first access when a spot opens, and a
+direct line to the business. Business owners get one place to reach and
+reward every regular. Launching in Cincinnati and Dayton, Ohio first.
+
+Pages:
+https://regularly.us/regulars/  Waitlist for customers.
+https://regularly.us/owners/    Waitlist for business owners (barbershops, salons, gyms, cafes).
+
+Usage:
+User-agent: *
+Allow: /
+Disallow: /thanks/
