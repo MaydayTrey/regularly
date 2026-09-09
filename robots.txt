@@ -1,0 +1,24 @@
+# Regularly. Landing pages are open to all crawlers, including AI crawlers.
+# Thank-you pages are post-submit and not useful in search.
+
+User-agent: *
+Allow: /
+Disallow: /thanks/
+
+User-agent: GPTBot
+Allow: /
+Disallow: /thanks/
+
+User-agent: ClaudeBot
+Allow: /
+Disallow: /thanks/
+
+User-agent: PerplexityBot
+Allow: /
+Disallow: /thanks/
+
+User-agent: Google-Extended
+Allow: /
+Disallow: /thanks/
+
+Sitemap: https://regularly.us/sitemap.xml

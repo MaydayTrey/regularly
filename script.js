@@ -97,16 +97,46 @@
     });
   }
 
-  /* 3. Local preview only. Live Server cannot take a POST, so on localhost
-     we skip the submit and jump straight to the thanks page. On Netlify this
-     block never runs and Netlify Forms handles the real submission. */
+  /* 3. Submit handling. The form has novalidate so we can show an accessible
+     error message instead of the browser bubble. On localhost (Live Server
+     cannot take a POST) we skip the submit and jump straight to the thanks
+     page; on Netlify the real POST goes through and Netlify Forms stores it. */
   var isLocal = /^(localhost|127\.0\.0\.1)$/.test(window.location.hostname);
   var waitlist = document.querySelector('form[name="regularly-waitlist"]');
-  if (isLocal && waitlist) {
+  var emailInput = document.getElementById("email");
+  var emailError = document.getElementById("email-error");
+
+  function setEmailError(message) {
+    if (emailError) emailError.textContent = message;
+    if (emailInput) emailInput.setAttribute("aria-invalid", message ? "true" : "false");
+  }
+
+  if (waitlist && emailInput) {
+    emailInput.addEventListener("input", function () {
+      if (emailInput.getAttribute("aria-invalid") === "true" && emailInput.validity.valid) {
+        setEmailError("");
+      }
+    });
+
     waitlist.addEventListener("submit", function (event) {
-      if (!waitlist.checkValidity()) return;
-      event.preventDefault();
-      window.location.assign(waitlist.getAttribute("action"));
+      var value = emailInput.value.trim();
+      if (!value) {
+        event.preventDefault();
+        setEmailError("Enter your email address.");
+        emailInput.focus();
+        return;
+      }
+      if (!emailInput.validity.valid) {
+        event.preventDefault();
+        setEmailError("That email address doesn't look right.");
+        emailInput.focus();
+        return;
+      }
+      setEmailError("");
+      if (isLocal) {
+        event.preventDefault();
+        window.location.assign(waitlist.getAttribute("action"));
+      }
     });
   }
 

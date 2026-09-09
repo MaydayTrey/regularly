@@ -1,0 +1,17 @@
+# Regularly
+
+> Regularly is an upcoming app that gives regulars priority at the places they already go, and gives business owners one place to reach and reward every regular. Launching in Cincinnati and Dayton, Ohio first. Under development; the site collects waitlist sign-ups.
+
+## What Regularly does
+
+- For regulars: your recurring slot is held for you, you get first access when a spot opens, and you have a direct line to the business. No rebooking from scratch every time.
+- For business owners: one place to reach every regular at once, hold their slots, and give them priority.
+
+## Pages
+
+- [For regulars](https://regularly.us/regulars/): waitlist sign-up for customers.
+- [For business owners](https://regularly.us/owners/): waitlist sign-up for owners of barbershops, salons, gyms, cafes, and similar businesses.
+
+## Contact
+
+- Email: hello@regularly.us
