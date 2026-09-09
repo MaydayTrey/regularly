@@ -97,7 +97,20 @@
     });
   }
 
-  /* 3. Contact links. */
+  /* 3. Local preview only. Live Server cannot take a POST, so on localhost
+     we skip the submit and jump straight to the thanks page. On Netlify this
+     block never runs and Netlify Forms handles the real submission. */
+  var isLocal = /^(localhost|127\.0\.0\.1)$/.test(window.location.hostname);
+  var waitlist = document.querySelector('form[name="regularly-waitlist"]');
+  if (isLocal && waitlist) {
+    waitlist.addEventListener("submit", function (event) {
+      if (!waitlist.checkValidity()) return;
+      event.preventDefault();
+      window.location.assign(waitlist.getAttribute("action"));
+    });
+  }
+
+  /* 4. Contact links. */
   var links = document.querySelectorAll("[data-mailto]");
   for (var j = 0; j < links.length; j++) {
     links[j].setAttribute("href", "mailto:" + CONTACT_EMAIL);
