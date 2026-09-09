@@ -1,0 +1,2 @@
+# Root goes to the customer-side page. "!" forces it even though index.html exists.
+/  /regulars  302!

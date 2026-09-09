@@ -1,0 +1,5 @@
+# Brand source files (ad PNGs, logo exports). Not part of the site.
+regularlyassets/
+regularlysmokesite/
+.DS_Store
+Thumbs.db

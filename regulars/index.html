@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="theme-color" content="#2f6b3f">
+  <link rel="icon" href="/logo-mark.png" type="image/png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,600&family=Pacifico&display=swap">
+  <link rel="stylesheet" href="/styles.css">
+  <title>Regularly. Priority for regulars.</title>
+  <meta name="description" content="Your slot, held. First dibs when something opens up. No rebooking from scratch every time.">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Regularly. Priority for regulars.">
+  <meta property="og:description" content="Your slot, held. First dibs when something opens up. No rebooking from scratch every time.">
+  <!-- Replace the domain once the Netlify URL is known. Facebook needs an absolute URL here. -->
+  <meta property="og:image" content="https://REPLACE-WITH-SITE-DOMAIN/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <!-- Meta Pixel. Paste the real Pixel ID into PIXEL_ID and it goes live. -->
+  <script>
+    var PIXEL_ID = "PIXEL_ID_HERE";
+    if (PIXEL_ID && PIXEL_ID !== "PIXEL_ID_HERE") {
+      !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+      n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+      n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+      t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+      document,'script','https://connect.facebook.net/en_US/fbevents.js');
+      fbq('init', PIXEL_ID);
+      fbq('track', 'PageView');
+    }
+  </script>
+</head>
+<body data-audience="regular">
+<section class="hero">
+  <div class="watermark" aria-hidden="true">Regularly</div>
+  <div class="hero-inner">
+    <div class="intro">
+    <a class="brand" href="/regulars/" aria-label="Regularly">
+      <img src="/logo-mark.png" alt="" width="512" height="512">
+      <span class="wordmark">Regularly</span>
+    </a>
+      <h1 data-copy="h1">You're a regular. You should be treated like one.</h1>
+      <p class="sub" data-copy="sub">Your slot, held. First dibs when something opens up. No rebooking from scratch every time.</p>
+    </div>
+
+    <div class="card">
+      <div class="toggle" data-toggle data-selected="regular" role="group" aria-label="Which describes you">
+        <span class="toggle-thumb" aria-hidden="true"></span>
+        <button type="button" data-audience="owner" aria-pressed="false">I'm a business owner</button>
+        <button type="button" data-audience="regular" aria-pressed="true">I'm a regular</button>
+      </div>
+
+      <form name="regularly-waitlist" method="POST" action="/thanks" data-netlify="true" netlify-honeypot="bot-field">
+        <input type="hidden" name="form-name" value="regularly-waitlist">
+        <input type="hidden" name="audience" value="regular">
+        <input type="hidden" name="source" value="direct">
+        <p class="hidden"><label>Leave this empty if you are human: <input name="bot-field"></label></p>
+
+        <label class="field">
+          <span class="sr-only">Email</span>
+          <input id="email" type="email" name="email" required autocomplete="email" inputmode="email" placeholder="you@email.com">
+        </label>
+
+        <label class="field">
+          <span data-copy="businessLabel">Where are you a regular?</span>
+          <input id="business" type="text" name="business" autocomplete="off" placeholder="My barber, my gym, the coffee shop on...">
+        </label>
+
+        <button class="btn" type="submit" data-copy="button">Get on the list</button>
+      </form>
+      <p class="note" data-copy="note">Under development. Enter your email to be notified at launch and get in early.</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>Regularly. Coming to Columbus and Dayton first.</p>
+  <p>Questions? <a data-mailto="text" href="#">Email us</a></p>
+</footer>
+<script src="/script.js" defer></script>
+</body>
+</html>
