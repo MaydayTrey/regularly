@@ -135,33 +135,36 @@ h1 {
 /* Audience toggle with a sliding thumb */
 .toggle {
   position: relative;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+  display: flex;
   gap: 4px;
   padding: 4px;
   margin: 0 0 16px;
   background: #ebe8de;
   border-radius: 999px;
 }
+/* The thumb is sized and placed by script.js to match the pressed button,
+   so labels of different lengths each get the room they need. */
 .toggle-thumb {
   position: absolute;
   top: 4px;
   bottom: 4px;
-  left: 4px;
-  width: calc(50% - 6px);
+  left: 0;
+  width: 0;
   border-radius: 999px;
   background: var(--green);
   box-shadow: 0 2px 6px rgba(27, 33, 28, 0.18);
-  transition: transform 0.3s cubic-bezier(0.2, 0.7, 0.2, 1);
+  will-change: transform, width;
 }
-.toggle[data-selected="regular"] .toggle-thumb {
-  transform: translateX(calc(100% + 4px));
+.toggle.is-ready .toggle-thumb {
+  transition: transform 0.3s cubic-bezier(0.2, 0.7, 0.2, 1), width 0.3s cubic-bezier(0.2, 0.7, 0.2, 1);
 }
 .toggle button {
   position: relative;
   z-index: 1;
+  flex: 1 1 auto;
+  min-width: 0;
   min-height: 48px;
-  padding: 0 6px;
+  padding: 6px 10px;
   border: 0;
   border-radius: 999px;
   background: transparent;
@@ -169,7 +172,8 @@ h1 {
   font: inherit;
   font-size: 0.875rem;
   font-weight: 600;
-  white-space: nowrap;
+  line-height: 1.2;
+  text-align: center;
   cursor: pointer;
   touch-action: manipulation;
   transition: color 0.2s ease;

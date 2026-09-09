@@ -42,6 +42,27 @@
   var audienceField = document.querySelector('input[name="audience"]');
   var swapTimer = null;
 
+  /* Move and size the thumb to sit exactly under the pressed button. */
+  function placeThumb() {
+    if (!toggle) return;
+    var thumb = toggle.querySelector(".toggle-thumb");
+    var current = toggle.querySelector('button[aria-pressed="true"]');
+    if (!thumb || !current) return;
+    thumb.style.width = current.offsetWidth + "px";
+    thumb.style.transform = "translateX(" + current.offsetLeft + "px)";
+  }
+
+  if (toggle) {
+    placeThumb();
+    /* Enable the slide animation only after the first placement. */
+    requestAnimationFrame(function () { toggle.classList.add("is-ready"); });
+    /* Re-measure once the web font arrives and whenever the width changes. */
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(placeThumb);
+    window.addEventListener("resize", placeThumb);
+    window.addEventListener("orientationchange", placeThumb);
+    if (window.ResizeObserver) new ResizeObserver(placeThumb).observe(toggle);
+  }
+
   function setText(key, value) {
     var el = document.querySelector('[data-copy="' + key + '"]');
     if (el) el.textContent = value;
@@ -76,6 +97,7 @@
         var on = buttons[i].getAttribute("data-audience") === audience;
         buttons[i].setAttribute("aria-pressed", on ? "true" : "false");
       }
+      placeThumb();
     }
 
     /* Fade the copy out, swap it, fade back in. */
