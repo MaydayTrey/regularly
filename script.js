@@ -65,6 +65,10 @@
     if (audienceField) audienceField.value = audience;
     document.body.setAttribute("data-audience", audience);
 
+    /* Each side lands on its own thanks page so submissions are easy to tell apart. */
+    var form = document.querySelector('form[name="regularly-waitlist"]');
+    if (form) form.setAttribute("action", "/thanks/" + audience + "s/");
+
     if (toggle) {
       toggle.setAttribute("data-selected", audience);
       var buttons = toggle.querySelectorAll("button[data-audience]");

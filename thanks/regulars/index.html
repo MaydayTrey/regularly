@@ -31,11 +31,11 @@
       document,'script','https://connect.facebook.net/en_US/fbevents.js');
       fbq('init', PIXEL_ID);
       fbq('track', 'PageView');
-      fbq('track', 'Lead', { content_name: 'unknown' });
+      fbq('track', 'Lead', { content_name: 'regular' });
     }
   </script>
 </head>
-<body>
+<body data-audience="regular">
 <section class="hero">
   <div class="watermark" aria-hidden="true">Regularly</div>
   <div class="hero-inner">
@@ -46,7 +46,7 @@
     </a>
       <h1>You're on the list.</h1>
       <p class="sub">We'll email you when Regularly is ready. Early adopters hear first.</p>
-      <p class="line">If you're a business owner and want to talk before launch, reply to the confirmation email or write to <a data-mailto="text" href="#">us</a>.</p>
+
     </div>
   </div>
 </section>
