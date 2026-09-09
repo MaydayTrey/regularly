@@ -2,8 +2,8 @@
 (function () {
   "use strict";
 
-  /* Paste the real address here. It fills every "email us" link on the site. */
-  var CONTACT_EMAIL = "hello@example.com";
+  /* Fills every "email us" link on the site. */
+  var CONTACT_EMAIL = "hello@regularly.us";
 
   var COPY = {
     owner: {
