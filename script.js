@@ -161,10 +161,41 @@
         return;
       }
       setEmailError("");
+
+      /* Destination depends on the toggle at submit time. Netlify keeps one
+         success redirect per form name, so we cannot rely on the action
+         attribute; we post over fetch and route to the thanks page ourselves. */
+      var aud = audienceField ? audienceField.value : "";
+      var dest = (aud === "owner" || aud === "regular") ? "/thanks/" + aud + "s/" : "/thanks/";
+      waitlist.setAttribute("action", dest);
+
       if (isLocal) {
         event.preventDefault();
-        window.location.assign(waitlist.getAttribute("action"));
+        window.location.assign(dest);
+        return;
       }
+
+      if (!window.fetch || !window.URLSearchParams) return; /* very old browser: plain POST */
+      event.preventDefault();
+      var submitBtn = waitlist.querySelector('button[type="submit"]');
+      if (submitBtn) submitBtn.disabled = true;
+
+      var body = new URLSearchParams();
+      var fields = waitlist.querySelectorAll("input[name]");
+      for (var f = 0; f < fields.length; f++) body.append(fields[f].name, fields[f].value);
+
+      fetch(window.location.pathname, {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: body.toString()
+      }).then(function (res) {
+        if (!res.ok) throw new Error("submit failed " + res.status);
+        window.location.assign(dest);
+      }).catch(function () {
+        /* Fall back to a normal form post; Netlify still records it. */
+        if (submitBtn) submitBtn.disabled = false;
+        waitlist.submit();
+      });
     });
   }
 
