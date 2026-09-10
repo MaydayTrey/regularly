@@ -162,7 +162,49 @@
     });
   }
 
-  /* 4. Contact links. */
+  /* 4. Meta Pixel micro-conversions: PageView -> ScrollToAbout -> CTAClick -> Lead.
+     Every call is guarded so an ad blocker can never cause an error. */
+  function track(name, params) {
+    try {
+      if (typeof window.fbq === "function") window.fbq("trackCustom", name, params);
+    } catch (e) { /* pixel blocked or broken, ignore */ }
+  }
+  var pageSlug = window.location.pathname.replace(/^\/|\/$/g, "").split("/")[0] || "root";
+  var isLanding = pageSlug === "owners" || pageSlug === "regulars";
+
+  /* ScrollToAbout: once per page load, when the About heading is half in view.
+     The heading, not the whole section, so this works on short phone screens
+     where the section itself is taller than the viewport. */
+  var about = document.getElementById("about-heading") || document.querySelector(".about");
+  if (isLanding && about && window.IntersectionObserver) {
+    var seen = false;
+    var observer = new IntersectionObserver(function (entries) {
+      for (var k = 0; k < entries.length; k++) {
+        if (entries[k].isIntersecting && !seen) {
+          seen = true;
+          observer.disconnect();
+          track("ScrollToAbout", { page: pageSlug });
+        }
+      }
+    }, { threshold: 0.5 });
+    observer.observe(about);
+  }
+
+  /* CTAClick: once per page load, on the tap itself, whether or not the form validates. */
+  var cta = document.querySelector('form[name="regularly-waitlist"] button[type="submit"]');
+  if (isLanding && cta) {
+    var ctaFired = false;
+    cta.addEventListener("click", function () {
+      if (ctaFired) return;
+      ctaFired = true;
+      track("CTAClick", {
+        page: pageSlug,
+        audience: audienceField ? audienceField.value : ""
+      });
+    });
+  }
+
+  /* 5. Contact links. */
   var links = document.querySelectorAll("[data-mailto]");
   for (var j = 0; j < links.length; j++) {
     links[j].setAttribute("href", "mailto:" + CONTACT_EMAIL);
