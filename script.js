@@ -96,6 +96,18 @@
     var form = document.querySelector('form[name="regularly-waitlist"]');
     if (form) form.setAttribute("action", "/thanks/" + audience + "s/");
 
+    /* Root page: the form stays hidden until a side is chosen. */
+    var pick = document.getElementById("pick-prompt");
+    if (pick) {
+      pick.hidden = true;
+      var hiddenForm = document.querySelector('form[name="regularly-waitlist"]');
+      var hiddenNote = document.getElementById("form-note");
+      if (hiddenForm) hiddenForm.hidden = false;
+      if (hiddenNote) hiddenNote.hidden = false;
+      var card = document.querySelector(".card");
+      if (card) card.classList.remove("card-unchosen");
+    }
+
     if (toggle) {
       toggle.setAttribute("data-selected", audience);
       var buttons = toggle.querySelectorAll("button[data-audience]");

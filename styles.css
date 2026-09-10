@@ -132,6 +132,16 @@ h1 {
   box-shadow: 0 24px 50px -32px rgba(27, 33, 28, 0.4);
 }
 
+/* Root page before a side is chosen: just the question and the two buttons */
+.pick {
+  margin: 0 0 12px;
+  font-size: 1.05rem;
+  font-weight: 600;
+  text-align: center;
+}
+.card-unchosen .toggle { margin-bottom: 0; }
+[hidden] { display: none !important; }
+
 /* Audience toggle with a sliding thumb */
 .toggle {
   position: relative;

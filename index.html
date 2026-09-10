@@ -156,14 +156,15 @@
       <p class="sub" data-copy="sub">Held slots, first dibs when something opens up, and one place for owners to reach every regular at once.</p>
     </div>
 
-    <div class="card">
+    <div class="card card-unchosen">
+      <p class="pick" id="pick-prompt">Which one are you?</p>
       <div class="toggle" data-toggle data-selected="" role="group" aria-label="Which describes you">
         <span class="toggle-thumb" aria-hidden="true"></span>
         <button type="button" data-audience="owner" aria-pressed="false">I'm a business owner</button>
         <button type="button" data-audience="regular" aria-pressed="false">I'm a regular</button>
       </div>
 
-      <form id="waitlist" name="regularly-waitlist" method="POST" action="/thanks/" data-netlify="true" netlify-honeypot="bot-field" aria-label="Join the Regularly waitlist" aria-describedby="form-note" novalidate="">
+      <form id="waitlist" name="regularly-waitlist" method="POST" action="/thanks/" data-netlify="true" netlify-honeypot="bot-field" aria-label="Join the Regularly waitlist" aria-describedby="form-note" novalidate="" hidden>
         <input type="hidden" name="form-name" value="regularly-waitlist">
         <input type="hidden" name="audience" value="unspecified">
         <input type="hidden" name="source" value="direct">
@@ -182,7 +183,7 @@
 
         <button class="btn" type="submit" data-copy="button">Get on the list</button>
       </form>
-      <p class="note" id="form-note" data-copy="note">Under development. Enter your email to be notified at launch and get in early.</p>
+      <p class="note" id="form-note" data-copy="note" hidden>Under development. Enter your email to be notified at launch and get in early.</p>
     </div>
   </div>
 </section>
