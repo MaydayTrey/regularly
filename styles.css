@@ -139,7 +139,26 @@ h1 {
   font-weight: 600;
   text-align: center;
 }
-.card-unchosen .toggle { margin-bottom: 0; }
+.card-unchosen .toggle {
+  margin-bottom: 0;
+  padding: 0;
+  gap: 12px;
+  background: transparent;
+  border-radius: 0;
+}
+.card-unchosen .toggle-thumb { display: none; }
+.card-unchosen .toggle button {
+  min-height: 52px;
+  border: 2px solid var(--green);
+  border-radius: 12px;
+  background: var(--card);
+  color: var(--green);
+  font-size: 0.95rem;
+}
+.card-unchosen .toggle button:hover {
+  background: var(--green);
+  color: #fff;
+}
 [hidden] { display: none !important; }
 
 /* Audience toggle with a sliding thumb */
