@@ -132,24 +132,45 @@ h1 {
   box-shadow: 0 24px 50px -32px rgba(27, 33, 28, 0.4);
 }
 
-/* Root page before a side is chosen: just the question and the two buttons */
+/* Root page before a side is chosen: just the question and two outlined buttons.
+   On the first choice the question collapses, the buttons morph into the
+   slider track, and the form slides down (see .reveal). */
 .pick {
   margin: 0 0 12px;
   font-size: 1.05rem;
   font-weight: 600;
   text-align: center;
 }
+.reveal {
+  display: grid;
+  grid-template-rows: 0fr;
+  opacity: 0;
+  transition: grid-template-rows 0.45s cubic-bezier(0.2, 0.7, 0.2, 1), opacity 0.3s ease;
+}
+.reveal > div {
+  min-height: 0;
+  overflow: hidden;
+  /* room for focus rings and the button shadow while clipped */
+  padding: 6px;
+  margin: -6px;
+}
+.reveal.open {
+  grid-template-rows: 1fr;
+  opacity: 1;
+}
 .card-unchosen .toggle {
   margin-bottom: 0;
   padding: 0;
   gap: 12px;
   background: transparent;
-  border-radius: 0;
 }
-.card-unchosen .toggle-thumb { display: none; }
+.toggle.is-settling .toggle-thumb,
+.card-unchosen .toggle-thumb { opacity: 0 !important; }
 .card-unchosen .toggle button {
   min-height: 52px;
-  border: 2px solid var(--green);
+  border-width: 2px;
+  border-style: solid;
+  border-color: var(--green);
   border-radius: 12px;
   background: var(--card);
   color: var(--green);
@@ -160,7 +181,7 @@ h1 {
   color: #fff;
 }
 @media (max-width: 479px) {
-  .card-unchosen .toggle { flex-direction: column; gap: 10px; }
+  .card-unchosen .toggle button { font-size: 0.875rem; padding: 6px 6px; }
 }
 [hidden] { display: none !important; }
 
@@ -173,6 +194,7 @@ h1 {
   margin: 0 0 16px;
   background: #ebe8de;
   border-radius: 999px;
+  transition: background-color 0.35s ease, padding 0.35s ease, gap 0.35s ease, margin 0.35s ease;
 }
 /* The thumb is sized and placed by script.js to match the pressed button,
    so labels of different lengths each get the room they need. */
@@ -199,7 +221,7 @@ h1 {
   min-width: 0;
   min-height: 48px;
   padding: 6px 10px;
-  border: 0;
+  border: 0 solid transparent;
   border-radius: 999px;
   background: transparent;
   color: var(--muted);
@@ -210,7 +232,7 @@ h1 {
   text-align: center;
   cursor: pointer;
   touch-action: manipulation;
-  transition: color 0.2s ease;
+  transition: color 0.2s ease, background-color 0.3s ease, border-color 0.3s ease, border-width 0.3s ease, border-radius 0.35s ease, min-height 0.35s ease, font-size 0.3s ease;
 }
 .toggle button[aria-pressed="true"] { color: #fff; }
 .toggle button:focus-visible {

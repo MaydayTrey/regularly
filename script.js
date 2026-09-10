@@ -96,16 +96,26 @@
     var form = document.querySelector('form[name="regularly-waitlist"]');
     if (form) form.setAttribute("action", "/thanks/" + audience + "s/");
 
-    /* Root page: the form stays hidden until a side is chosen. */
-    var pick = document.getElementById("pick-prompt");
-    if (pick) {
-      pick.hidden = true;
-      var hiddenForm = document.querySelector('form[name="regularly-waitlist"]');
-      var hiddenNote = document.getElementById("form-note");
-      if (hiddenForm) hiddenForm.hidden = false;
-      if (hiddenNote) hiddenNote.hidden = false;
+    /* Root page: on the first choice, collapse the question, morph the two
+       buttons into the slider, and slide the form down underneath. */
+    var pickWrap = document.getElementById("pick-wrap");
+    var formWrap = document.getElementById("form-wrap");
+    if (pickWrap && formWrap && !formWrap.classList.contains("open")) {
+      pickWrap.classList.remove("open");
+      formWrap.classList.add("open");
       var card = document.querySelector(".card");
       if (card) card.classList.remove("card-unchosen");
+      if (toggle) toggle.classList.add("is-settling");
+      /* The buttons change shape over ~350ms; measure the thumb once they have. */
+      setTimeout(placeThumb, 200);
+      setTimeout(function () {
+        if (toggle) toggle.classList.remove("is-settling");
+        placeThumb();
+        var revealed = document.querySelector('form[name="regularly-waitlist"]');
+        if (revealed && revealed.getBoundingClientRect().bottom > window.innerHeight) {
+          revealed.scrollIntoView({ behavior: "smooth", block: "nearest" });
+        }
+      }, 480);
     }
 
     if (toggle) {
