@@ -159,6 +159,9 @@ h1 {
   background: var(--green);
   color: #fff;
 }
+@media (max-width: 479px) {
+  .card-unchosen .toggle { flex-direction: column; gap: 10px; }
+}
 [hidden] { display: none !important; }
 
 /* Audience toggle with a sliding thumb */
