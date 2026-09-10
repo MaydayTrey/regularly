@@ -47,7 +47,13 @@
     if (!toggle) return;
     var thumb = toggle.querySelector(".toggle-thumb");
     var current = toggle.querySelector('button[aria-pressed="true"]');
-    if (!thumb || !current) return;
+    if (!thumb) return;
+    if (!current) {
+      /* Root page: nothing chosen yet, so no thumb. */
+      thumb.style.opacity = "0";
+      return;
+    }
+    thumb.style.opacity = "1";
     thumb.style.width = current.offsetWidth + "px";
     thumb.style.transform = "translateX(" + current.offsetLeft + "px)";
   }
@@ -170,7 +176,7 @@
     } catch (e) { /* pixel blocked or broken, ignore */ }
   }
   var pageSlug = window.location.pathname.replace(/^\/|\/$/g, "").split("/")[0] || "root";
-  var isLanding = pageSlug === "owners" || pageSlug === "regulars";
+  var isLanding = pageSlug === "owners" || pageSlug === "regulars" || pageSlug === "root";
 
   /* ScrollToAbout: once per page load, when the About heading is half in view.
      The heading, not the whole section, so this works on short phone screens
@@ -186,8 +192,18 @@
           track("ScrollToAbout", { page: pageSlug });
         }
       }
-    }, { threshold: 0.5 });
-    observer.observe(about);
+    }, { threshold: 0.5, rootMargin: "0px 0px -30% 0px" });
+    /* On tall desktop screens the heading can be visible at load. Only start
+       watching after the visitor actually scrolls, and only count the heading
+       once it reaches the top 70% of the viewport. */
+    var armed = false;
+    function arm() {
+      if (armed) return;
+      armed = true;
+      window.removeEventListener("scroll", arm);
+      observer.observe(about);
+    }
+    window.addEventListener("scroll", arm, { passive: true });
   }
 
   /* CTAClick: once per page load, on the tap itself, whether or not the form validates. */

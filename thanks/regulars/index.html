@@ -48,7 +48,7 @@
       t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
       document,'script','https://connect.facebook.net/en_US/fbevents.js');
       fbq('init', PIXEL_ID);
-      fbq('track', 'PageView');
+      fbq('track', 'PageView', { page: 'thanks-regulars', audience: 'regular' });
       fbq('track', 'Lead', { content_name: 'regular', audience: 'regular' });
     }
   </script>
