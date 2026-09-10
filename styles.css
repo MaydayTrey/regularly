@@ -253,6 +253,50 @@ input[aria-invalid="true"] { border-color: #b3261e; }
   color: var(--muted);
 }
 
+/* About: short description under the hero */
+.about {
+  background: var(--bg);
+}
+.about-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 40px 20px 8px;
+  padding-left: max(20px, env(safe-area-inset-left));
+  padding-right: max(20px, env(safe-area-inset-right));
+}
+.about h2 {
+  margin: 0 0 10px;
+  font-size: 1.4rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+.about-lead {
+  max-width: 62ch;
+  margin: 0 0 24px;
+  color: var(--muted);
+}
+.about-cols {
+  display: grid;
+  gap: 20px;
+}
+.about-col {
+  padding: 18px 20px;
+  border-radius: 16px;
+  background: var(--green-soft);
+}
+.about-col h3 {
+  margin: 0 0 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--green);
+}
+.about-col ul {
+  margin: 0;
+  padding-left: 1.1em;
+}
+.about-col li { margin: 0 0 6px; }
+.about-col li:last-child { margin-bottom: 0; }
+
 /* Thanks page */
 .line {
   margin: 14px 0 0;
@@ -299,13 +343,17 @@ footer a {
     grid-template-columns: 1.15fr 1fr;
     align-items: center;
     gap: 64px;
-    min-height: 78vh;
+    min-height: min(78vh, 680px);
     padding: 64px 40px 80px;
   }
   .brand img { width: 56px; height: 56px; }
   h1 { margin-top: 26px; }
   .card { padding: 28px; }
   .toggle button { font-size: 0.95rem; }
+  .about-inner { padding: 56px 40px 16px; }
+  .about h2 { font-size: 1.6rem; }
+  .about-cols { grid-template-columns: 1fr 1fr; gap: 24px; }
+  .about-col { padding: 22px 24px; }
   footer { padding: 36px 40px 56px; }
 }
 
